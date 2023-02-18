@@ -1,4 +1,4 @@
-package host23.forelesninger;
+package host23.div;
 
 public class minste {
     static int minPosisjon(int[] liste){
