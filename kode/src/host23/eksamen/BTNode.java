@@ -39,9 +39,14 @@ public class BTNode {
      * Skriver ut inorden ved hjelp av rekursjon
      */
     public void printInOrder() {
-        printInOrder(this = this.left_child);
+        if (this.left_child != null) {
+            this.left_child.printInOrder();
+        }
         System.out.println(this.value);
-        printInOrder(this = this.right_child);
+
+        if (this.right_child != null) {
+            this.right_child.printInOrder();
+        }
     }
 
     public static void main(String[] args) {
