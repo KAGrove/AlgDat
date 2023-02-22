@@ -58,31 +58,14 @@ public class EH2018 {
          * @param q Noden som skal fjernes
          */
         void remove(Node q) {
-            // Første node
-            if (q.prev == null){
-                start.next.prev = null;
-                start = start.next;
-            }
+            Node p = q.prev;
+            Node r = q.next;
 
-            // Siste node
-            if (q.next == null){
-                end.prev.next = null;
-            }
-
-            Node p = new Node(start.value);
-            Node r = new Node(start.next.value);
-            while(true){
-                if (p.value != q.value){
-                    p = p.next;
-                    r = r.next;
-                }
-                else{
-                    p = p.prev;
-                    p.next = r;
-                    r.prev = p;
-                }
-            }
+            p.next = r;
+            r.prev = p;
+            q = null;
         }
+
         /**
          * Funksjon som skriver ut den lenkede listen
          */
