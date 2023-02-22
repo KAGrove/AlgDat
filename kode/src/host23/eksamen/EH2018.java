@@ -51,7 +51,18 @@ public class EH2018 {
          * @param index Indexen å fjerne
          */
         void remove(int index) {
-            throw new UnsupportedOperationException("Ikke kodet ennå!");
+            Node p = new Node(start.value);
+            Node q = new Node(start.next.next.value);
+
+            for (int i = 0; i < index; i++){
+                p = p.next;
+                q = q.next;
+            }
+
+            p.next = q;
+            q.prev = p;
+
+
         }
         /**
          * Funksjon som fjerner noden q fra en dobbelt lenket liste
