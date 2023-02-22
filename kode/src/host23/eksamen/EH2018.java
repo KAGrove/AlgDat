@@ -58,7 +58,30 @@ public class EH2018 {
          * @param q Noden som skal fjernes
          */
         void remove(Node q) {
-            throw new UnsupportedOperationException("Ikke kodet ennå!");
+            // Første node
+            if (q.prev == null){
+                start.next.prev = null;
+                start = start.next;
+            }
+
+            // Siste node
+            if (q.next == null){
+                end.prev.next = null;
+            }
+
+            Node p = new Node(start.value);
+            Node r = new Node(start.next.value);
+            while(true){
+                if (p.value != q.value){
+                    p = p.next;
+                    r = r.next;
+                }
+                else{
+                    p = p.prev;
+                    p.next = r;
+                    r.prev = p;
+                }
+            }
         }
         /**
          * Funksjon som skriver ut den lenkede listen
@@ -86,5 +109,7 @@ public class EH2018 {
         list.print();
         list.remove(6);
         list.print();
+
+
     }
 }
