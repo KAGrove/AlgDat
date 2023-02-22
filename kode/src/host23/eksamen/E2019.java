@@ -37,7 +37,20 @@ public class E2019 {
             }
         }
         void remove(char value) {
-            // Din kode her
+            Node q = new Node(head.value);
+            while (q.next != null){
+                if (q.value != value){
+                    q = q.next;
+                }
+                else{
+                    Node p = new Node(q.prev);
+                    Node r = new Node(q.next);
+
+                    p.next = r;
+                    r.prev = q;
+
+                    size--;
+                }
         }
     }
 }
