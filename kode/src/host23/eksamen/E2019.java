@@ -1,3 +1,4 @@
+/*
 package host23.eksamen;
 
 public class E2019 {
@@ -66,3 +67,4 @@ public class E2019 {
 
 
 
+*/
