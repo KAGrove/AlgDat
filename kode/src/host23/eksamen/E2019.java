@@ -1,4 +1,3 @@
-/*
 package host23.eksamen;
 
 public class E2019 {
@@ -22,39 +21,48 @@ public class E2019 {
                 removeFirst();
             } else if (index == size - 1) {
                 removeLast();
-            } else {
-                Node q = new Node(head.value);
-                for (int i = 0; i < index; i++) {
-                    q = q.next;
-                }
-                Node p = new Node(q.prev);
-                Node r = new Node(q.next);
-
-                p.next = r;
-                r.prev = q;
-
-                size--;
             }
+            else {
+                if ((size / 2) > index) {
+                    Node q = head;
+                    for (int i = 0; i < index; i++) {
+                        q = q.next;
+                    }
+                } else {
+                    Node q = tail;
+                    for (int i = size - 1; i > index i--){
+                        q = q.prev;
+                    }
+                }
+            }
+            Node p = q.prev;
+            Node r = q.next;
+
+            p.next = r;
+            r.prev = p;
+
+            size--;
         }
         void remove(char value) {
-            Node q = new Node(head.value);
-            while (q.next != null){
-                if (q.value != value){
+            Node q = head;
+            while(true){
+                if(q.value != value){
                     q = q.next;
                 }
                 else{
-                    Node p = new Node(q.prev);
-                    Node r = new Node(q.next);
-
-                    p.next = r;
-                    r.prev = q;
-
-                    size--;
+                    break;
                 }
+            }
+            Node p = q.prev;
+            Node r = q.next;
+
+            p.next = r;
+            r.prev = p;
+
+            size--;
         }
     }
 }
 
 
 
-*/
