@@ -29,21 +29,21 @@ public class DoubleLinkedList<T> {
      * System.out.println(list); // utskrift: ["a", "b", "c", "d", "g", "e", "f"]
      */
     void insert(int index, T value) {
-        if(head.equals(index)){
-            Node node = head;
+        if(index == 0){
+            Node node = new Node(value);
             node.next = head;
             head.prev = node;
             head = head.prev;
         }
-        if(tail.equals(index)){
-            Node node = tail;
+        if(tail.value.equals(index)){
+            Node node = new Node(value);
             tail.next = node;
             node.prev = tail;
             tail = tail.next;
         }
         else{
             Node p = head;
-            Node q = new Node(index);
+            Node q = new Node(value);
             Node r = p.next.next;
             for(int i = 0; i < index-1; i++){
                 p = p.next;
