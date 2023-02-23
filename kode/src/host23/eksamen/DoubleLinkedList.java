@@ -71,7 +71,27 @@ public class DoubleLinkedList<T> {
      * System.out.println(list) // utskrift: ["a", "b", "c", "d", "f"]
      *//*
 
-    void remove(int index) { }
+    void remove(int index) {
+        if(head == null){
+            throw new IndexOutOfBoundsException("Tom liste!");
+        }
+
+        Node q = head;
+
+        for(int i = 0; i < index; i++){
+            q = q.next;
+        }
+
+        Node p = q.prev;
+        Node r = q.next;
+
+        p.next = q;
+        q.prev = p;
+        q.next = r;
+        r.prev = q;
+
+        // Mangler noen corner cases og sånt
+    }
 }
 
 */
