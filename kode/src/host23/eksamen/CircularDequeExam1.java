@@ -34,6 +34,9 @@ public class CircularDequeExam1 {
         size++;
     }
     char popFront() {
+        if (size == 0) {
+            throw new ArrayIndexOutOfBoundsException("Køen er tom!");
+        }
         char fjerne = values[begin];
         values[begin] = ' ';    // Mellomrommet mellom ' ' er viktig, -> tom char.
         begin = (fjerne+1) % capacity;
@@ -41,10 +44,13 @@ public class CircularDequeExam1 {
         return fjerne;
     }
     char popBack() {
-        /**
-         * Denne må du implementere
-         */
-        throw new UnsupportedOperationException("Not implemented");
+        if (size == 0) {
+            throw new ArrayIndexOutOfBoundsException("Køen er tom!");
+        }
+        end = (end-1+capacity) % capacity;
+        char fjerne = values[end];
+        size--;
+        return fjerne;
     }
 }
 
