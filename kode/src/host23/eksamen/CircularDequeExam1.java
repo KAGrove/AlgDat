@@ -23,6 +23,7 @@ public class CircularDequeExam1 {
         end = (end+1) % capacity;
         size++;
     }
+
     void pushFront(char value) {
         if(size == capacity){
             throw new ArrayIndexOutOfBoundsException("Køen er full!");
