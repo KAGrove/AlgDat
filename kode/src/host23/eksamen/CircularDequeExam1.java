@@ -23,13 +23,14 @@ public class CircularDequeExam1 {
         end = (end+1) % capacity;
         size++;
     }
-
     void pushFront(char value) {
         if(size == capacity){
             throw new ArrayIndexOutOfBoundsException("Køen er full!");
         }
-        values[begin] = value;
-        begin = (begin-1) % capacity;
+        int pos = (begin-1+capacity) % capacity;
+
+        values[pos] = value;
+        begin = pos;
         size++;
     }
     char popFront() {
