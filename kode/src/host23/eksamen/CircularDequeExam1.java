@@ -19,16 +19,17 @@ public class CircularDequeExam1 {
         if(size == capacity){
             throw new ArrayIndexOutOfBoundsException("Køen er full!");
         }
-        if (size < capacity) {
-            values[(end + 1) % capacity] = value;
-            end = (end+1) % capacity;
-        }
+        values[end] = value;
+        end = (end+1) % capacity;
+        size++;
     }
     void pushFront(char value) {
-        /**
-         * Denne må du implementere
-         */
-        throw new UnsupportedOperationException("Not implemented");
+        if(size == capacity){
+            throw new ArrayIndexOutOfBoundsException("Køen er full!");
+        }
+        values[begin] = value;
+        begin = (begin-1) % capacity;
+        size++;
     }
     char popFront() {
         /**
