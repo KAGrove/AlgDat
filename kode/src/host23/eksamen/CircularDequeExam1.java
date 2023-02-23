@@ -16,7 +16,13 @@ public class CircularDequeExam1 {
         this.values = new char[capacity];
     }
     void pushBack(char value) {
-
+        if(size == capacity){
+            throw new ArrayIndexOutOfBoundsException("Køen er full!");
+        }
+        if (size < capacity) {
+            values[(end + 1) % capacity] = value;
+            end = (end+1) % capacity;
+        }
     }
     void pushFront(char value) {
         /**
