@@ -33,25 +33,28 @@ public class DoubleLinkedList<T> {
             Node node = new Node(value);
             node.next = head;
             head.prev = node;
-            head = head.prev;
+            head = node;
         }
         if(tail.value.equals(index)){
             Node node = new Node(value);
             tail.next = node;
             node.prev = tail;
-            tail = tail.next;
+            tail = node;
         }
-        else{
+        else {
             Node p = head;
             Node q = new Node(value);
-            Node r = p.next.next;
-            for(int i = 0; i < index-1; i++){
+            Node r = null;
+            for(int i = 0; i < index-1 && p != null; i++) {
                 p = p.next;
             }
-            p.next = q;
-            q.prev = p;
-            r.prev = q;
-            q.next = r;
+            if(p != null) {
+                r = p.next;
+                p.next = q;
+                q.prev = p;
+                r.prev = q;
+                q.next = r;
+            }
         }
     /**
      * Remove fjerner verdi på plass index i den dobbelt lenkede listen.
