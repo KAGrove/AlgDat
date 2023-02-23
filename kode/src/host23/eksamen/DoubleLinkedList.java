@@ -28,7 +28,31 @@ public class DoubleLinkedList<T> {
      * list.insert(4, "g");
      * System.out.println(list); // utskrift: ["a", "b", "c", "d", "g", "e", "f"]
      */
-    void insert(int index, T value) { }
+    void insert(int index, T value) {
+        if(head.equals(index)){
+            Node node = head;
+            node.next = head;
+            head.prev = node;
+            head = head.prev;
+        }
+        if(tail.equals(index)){
+            Node node = tail;
+            tail.next = node;
+            node.prev = tail;
+            tail = tail.next;
+        }
+        else{
+            Node p = head;
+            Node q = new Node(index);
+            Node r = p.next.next;
+            for(int i = 0; i < index-1; i++){
+                p = p.next;
+            }
+            p.next = q;
+            q.prev = p;
+            r.prev = q;
+            q.next = r;
+        }
     /**
      * Remove fjerner verdi på plass index i den dobbelt lenkede listen.
      * Eksempel:
