@@ -1,3 +1,7 @@
+// En bedre løsning:
+// C:\Users\knuta\Documents\Skole\3. semester\1 AlgDat\Kode\kode\src\eksamen\host2021\DoubleLinkedList.java
+
+/*
 package host23.eksamen;
 
 public class DoubleLinkedList<T> {
@@ -21,13 +25,15 @@ public class DoubleLinkedList<T> {
     public String toString() { }
     void add_first(T value) { }
     void add_last(T value) { }
-    /**
+    */
+/**
      * Insert legger til en ny verdi på plass index i den dobbelt lenkede listen.
      * Eksempel:
      * System.out.println(list); // utskrift: ["a", "b", "c", "d", "e", "f"]
      * list.insert(4, "g");
      * System.out.println(list); // utskrift: ["a", "b", "c", "d", "g", "e", "f"]
-     */
+     *//*
+
     void insert(int index, T value) {
         if(index == 0){
             Node node = new Node(value);
@@ -56,13 +62,16 @@ public class DoubleLinkedList<T> {
                 q.next = r;
             }
         }
-    /**
+    */
+/**
      * Remove fjerner verdi på plass index i den dobbelt lenkede listen.
      * Eksempel:
      * System.out.println(list) // utskrift: ["a", "b", "c", "d", "e", "f"]
      * list.remove(4);
      * System.out.println(list) // utskrift: ["a", "b", "c", "d", "f"]
-     */
+     *//*
+
     void remove(int index) { }
 }
 
+*/
