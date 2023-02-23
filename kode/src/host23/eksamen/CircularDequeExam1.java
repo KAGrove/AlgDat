@@ -34,10 +34,11 @@ public class CircularDequeExam1 {
         size++;
     }
     char popFront() {
-        /**
-         * Denne må du implementere
-         */
-        throw new UnsupportedOperationException("Not implemented");
+        char fjerne = values[begin];
+        values[begin] = ' ';    // Mellomrommet mellom ' ' er viktig, -> tom char.
+        begin = (fjerne+1) % capacity;
+        size--;
+        return fjerne;
     }
     char popBack() {
         /**
