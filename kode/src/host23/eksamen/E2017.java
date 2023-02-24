@@ -10,7 +10,7 @@ public class E2017 {
         int[] b = new int[a.length];
 
         int j = 0;
-        for (int i = 0; i < a.length; i++){
+        for (int i = 0; i < a.length-1; i++){
             if(b[j] == 0){  // For første nye tall, starte b på 1
                 b[j]++;
             }
@@ -25,11 +25,23 @@ public class E2017 {
                 j++;
             }
         }
+
+        if(a[a.length-1] < a[a.length-2]){
+            throw new IllegalStateException("Tabellen skal være sortert stigende!");
+        }
+        else if(a[a.length-1] == a[a.length-2]){
+            System.out.println(a[a.length-1] + " " + b[j]);
+        }
+        else{
+            b[j]++;
+            System.out.println(a[a.length-1] + " " + b[j]);
+        };
+
         return 5;
     }
 
     public static void main(String[] args) {
-        int[] a = {3, 3, 4, 5, 5, 6, 7, 7, 7, 8};
+        int[] a = {3, 3, 4, 5, 5, 6, 7, 7, 7, 8,8,8,8};
         frekvensFordeling(a);
     }
 }
