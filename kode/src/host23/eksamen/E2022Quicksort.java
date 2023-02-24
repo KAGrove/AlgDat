@@ -27,10 +27,22 @@ public class E2022Quicksort {
             else{
                 bytt(x, h--, k--);
             }
-
         }
         return new int[] {v, h}; // Returner indeks til første og siste element lik skilleverdi
     }
+
+    public static void quicksortRep(int[] x, int v, int h){
+        // Returner hvis høyre indeks er mindre enn eller lik venstre indeks47
+        if (h <= v) return;
+
+        // Tredelt partisjonering av x[v,h] med x[h] som pivot50
+        int[] pindeks = parterMLS(x, v, h);
+
+        // ENDRE GRENSENE I DE REKURSIVE KALLENE SLIK AT SORTERINGEN FUNGERER53
+        quicksortRep(x, 1, -1);
+        quicksortRep(x, 1, -1);
+    }
+
 
     public static void main(String[] args) {
         int[] x = {3,4,1,3,4,2,2,1,2,4,3};
