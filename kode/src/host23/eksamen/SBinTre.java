@@ -32,9 +32,11 @@ public class SBinTre<T>
     {
         Node<T> p = rot, q = null;
         int cmp = 0;
+        int nivå = 0;
         while (p != null)
         {
             q = p;
+            nivå++;
             cmp = comp.compare(verdi,p.verdi);
             p = cmp < 0 ? p.venstre : p.høyre;
         }
@@ -42,6 +44,10 @@ public class SBinTre<T>
         if (q == null) rot = p;
         else if (cmp < 0) q.venstre = p;
         else q.høyre = p;
+
+        if(nivå > høyde){
+            høyde = nivå;
+        }
         antall++;
     }
     public T min()
@@ -83,5 +89,6 @@ public class SBinTre<T>
 
         // Print the minimum element in the tree
         System.out.println("Minimum element in the tree: " + tree.min());
+        System.out.println("Høyde: " + tree.høyde);
     }
 } // class SBinTre
