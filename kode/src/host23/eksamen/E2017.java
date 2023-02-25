@@ -3,42 +3,34 @@ package host23.eksamen;
 import java.util.ArrayList;
 
 public class E2017 {
-    public static int frekvensFordeling(int[] a){
-        if (a.length == 0){
+    public static void frekvensFordeling(int[] a)
+    {
+        if(a.length == 0)
+        {
             System.out.println(0 + " " + 0);
         }
-        int[] b = new int[a.length];
+        int temp = a[0]; //verdien man måler frekvensen til
+        int frekvens = 1; //frekvensen for verdien
 
-        int j = 0;
-        for (int i = 0; i < a.length-1; i++){
-            if(b[j] == 0){  // For første nye tall, starte b på 1
-                b[j]++;
-            }
-            if(a[i+1] < a[i]){
-                throw new IllegalStateException("Tabellen skal være sortert stigende!");
-            }
-            else if(a[i+1] == a[i]){
-                b[j]++;
-            }
-            else{
-                System.out.println(a[i] + " " + b[j]);
-                j++;
+        for(int i = 1; i < a.length; i++)
+        {
+            if(temp == a[i]) //sjekker om temp er lik som verdi i tabellen
+            {
+                frekvens++;
+            } else if(temp < a[i])
+            {
+                System.out.println(temp + " " + frekvens);
+                temp = a[i];
+                frekvens = 1;
+            } else //tabellen er her ikke sortert
+            {
+                throw new IllegalStateException("Tabellen er ikke sortert");
             }
         }
-
-        if(a[a.length-1] < a[a.length-2]){
-            throw new IllegalStateException("Tabellen skal være sortert stigende!");
-        }
-        else if(a[a.length-1] == a[a.length-2]){
-            System.out.println(a[a.length-1] + " " + b[j]);
-        }
-        else{
-            b[j]++;
-            System.out.println(a[a.length-1] + " " + b[j]);
-        };
-
-        return 5;
+        //må ha en ekstra utskrift for å få skrevet ut den siste verdien (som også evt. er den eneste)
+        System.out.println(temp + " " + frekvens);
     }
+
 
     public static void main(String[] args) {
         int[] a = {3, 3, 4, 5, 5, 6, 7, 7, 7, 8,8,8,8};
