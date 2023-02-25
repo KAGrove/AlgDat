@@ -49,14 +49,16 @@ public class SBinTre<T>
         if(tom()){
             return null;
         }
-        T minste = rot.verdi;
-        Node<T> p = rot;
-        int cmp = 0;
-        while (p != null){
-            cmp = comp.compare(minste, p.verdi);
-            p = cmp < 0 ? p.venstre : p.høyre;
-            }
+        return min(rot);
+    }
+
+    public T min(Node <T> p)
+    {
+        if(p.venstre == null){
+            return p.verdi;
         }
+        return min(p.venstre);
+
     }
 /*    private int dybde(Node<T> p)
     {
@@ -66,4 +68,20 @@ public class SBinTre<T>
     {
         // Skal kodes
     }*/
+
+    public static void main(String[] args) {
+        // Create a new SBinTre instance with a comparator that compares integers
+        SBinTre<Integer> tree = new SBinTre<>(Comparator.naturalOrder());
+
+        // Add some elements to the tree
+        tree.leggInn(5);
+        tree.leggInn(3);
+        tree.leggInn(7);
+        tree.leggInn(2);
+        tree.leggInn(4);
+        tree.leggInn(1);
+
+        // Print the minimum element in the tree
+        System.out.println("Minimum element in the tree: " + tree.min());
+    }
 } // class SBinTre
