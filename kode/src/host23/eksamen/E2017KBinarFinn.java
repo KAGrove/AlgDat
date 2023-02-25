@@ -1,5 +1,8 @@
 package host23.eksamen;
 
+// Svakhet: Hvis man har et langt array med gjentakende verdi, og man søker etter det tallet,
+// da vil man måtte være i den siste løkken hele tiden, det blir O(n).
+
 public class E2017KBinarFinn {
     public static int finn(int[] a, int verdi)
     {
@@ -9,13 +12,21 @@ public class E2017KBinarFinn {
         {
             m = (v + h)/2; // heltallsdivisjon - finner midten
             int midtverdi = a[m]; // hjelpevariabel for midtverdien
-            if (verdi > midtverdi) v = m + 1; // verdi i a[m+1:h]
-            else if (verdi < midtverdi) h = m - 1; // verdi i a[v:m-1]
+            if (verdi > midtverdi){
+                v = m + 1; // verdi i a[m+1:h]
+            }
+            else if (verdi < midtverdi){
+                h = m - 1; // verdi i a[v:m-1]
+            }
             else break; // funnet
         }
-        if (v > h) return -(v + 1); // v er innsettingspunktet
+        if (v > h){
+            return -(v + 1); // v er innsettingspunktet
+        }
         // må finne den første hvis det er flere forekomster av verdi
-        while (m > 0 && a[m - 1] == verdi) m--;
+        while (m > 0 && a[m - 1] == verdi){
+            m--;
+        }
         return m;
     }
 
