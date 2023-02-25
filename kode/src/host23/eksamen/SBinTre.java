@@ -105,7 +105,7 @@ public class SBinTre<T>
 
 
     public void nedersteNivå(Node<T> p, ArrayList<T> liste){
-        if(p.venstre == null && p.høyre == null){
+        if(dybde(p) == høyde()){
             liste.add(p.verdi);
         }
 
