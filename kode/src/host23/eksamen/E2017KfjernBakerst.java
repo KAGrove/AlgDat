@@ -4,30 +4,18 @@ import hjelpeklasser.Kø;
 import hjelpeklasser.LenketKø;
 
 public class E2017KfjernBakerst {
-    public static <T> int fjernBakerst(Kø<T> kø, int antall){
-        int fjernet = 0;
-        int size = kø.antall();
-        if(antall > kø.antall()){
-            while(!kø.tom()){
-                kø.taUt();
-                fjernet++;
-            }
+    public static <T> int fjernBakerst(Kø<T> kø, int antall)
+    {
+        if (antall < 0) throw new IllegalArgumentException("Negativt antall!");
+        int n = kø.antall();
+        if (antall >= n)
+        {
+            kø.nullstill();
+            return n;
         }
-
-        Kø <T> kø2 = new LenketKø<>();
-
-        while(!kø.tom()){
-            kø2.leggInn(kø.taUt());
-        }
-
-        if(!kø2.tom()){
-            fjernet = antall;
-        }
-        for(int i = 0; i < size - antall; i++){
-            kø.leggInn(kø2.taUt());
-        }
-
-        return fjernet;
+        for (int i = n - antall; i > 0; i--) kø.leggInn(kø.taUt());
+        for (int i = 0; i < antall; i++) kø.taUt();
+        return antall;
     }
 
     public static void main(String[] args) {
