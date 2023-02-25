@@ -66,11 +66,28 @@ public class SBinTre<T>
         return min(p.venstre);
 
     }
-/*    private int dybde(Node<T> p)
-    {
-        // Skal kodes
+   private int dybde(Node<T> p){
+        Node<T> q = rot;
+        int dybde = 0;
+        int cmp = 0;
+        while (q != null)
+        {
+            cmp = comp.compare(p.verdi, q.verdi);
+            if(cmp < 0){
+                q = q.venstre;
+            }
+            else if(cmp > 0){
+                q = q.høyre;
+            }
+            else{
+                return dybde;
+            }
+            dybde++;
+        }
+        return dybde;
     }
-    public T[] nedersteNivå()
+
+/*    public T[] nedersteNivå()
     {
         // Skal kodes
     }*/
@@ -90,5 +107,7 @@ public class SBinTre<T>
         // Print the minimum element in the tree
         System.out.println("Minimum element in the tree: " + tree.min());
         System.out.println("Høyde: " + tree.høyde);
+        Node<Integer> node = new Node<>(1);
+        System.out.println("Dybde: " + tree.dybde(node));
     }
 } // class SBinTre
