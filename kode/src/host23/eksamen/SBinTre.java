@@ -96,11 +96,7 @@ public class SBinTre<T>
         }
         ArrayList<T> liste = new ArrayList<>();
         nedersteNivå(rot, liste);
-        T[] array = (T[]) new Object[liste.size()];
-        for (int i = 0; i < liste.size(); i++){
-            array[i] = liste.get(i);
-        }
-        return array;
+        return (T[]) liste.toArray();
     }
 
 
@@ -108,7 +104,6 @@ public class SBinTre<T>
         if(dybde(p) == høyde()){
             liste.add(p.verdi);
         }
-
         if(p.venstre != null){
             nedersteNivå(p.venstre, liste);
         }
