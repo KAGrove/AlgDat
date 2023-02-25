@@ -1,5 +1,6 @@
 package host23.eksamen;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -93,25 +94,27 @@ public class SBinTre<T>
         if(tom()){
             return (T[]) new Object[0];
         }
-        T[] liste = (T[]) new Object[(int) Math.pow(2,høyde())];
-        int index = 0;
-        return nedersteNivå(rot, liste, index);
+        ArrayList<T> liste = new ArrayList<>();
+        nedersteNivå(rot, liste);
+        T[] array = (T[]) new Object[liste.size()];
+        for (int i = 0; i < liste.size(); i++){
+            array[i] = liste.get(i);
+        }
+        return array;
     }
 
 
-    public T[] nedersteNivå(Node<T> p, T[] liste, int index){
+    public void nedersteNivå(Node<T> p, ArrayList<T> liste){
         if(p.venstre == null && p.høyre == null){
-            liste[index] = p.verdi;
-            index++;
+            liste.add(p.verdi);
         }
 
         if(p.venstre != null){
-            return nedersteNivå(p.venstre, liste, index);
+            nedersteNivå(p.venstre, liste);
         }
         if(p.høyre != null){
-            return nedersteNivå(p.høyre, liste, index);
+            nedersteNivå(p.høyre, liste);
         }
-        return liste;
     }
 
 
@@ -123,9 +126,9 @@ public class SBinTre<T>
         tree.leggInn(5);
         tree.leggInn(3);
         tree.leggInn(7);
-
-
-
+        tree.leggInn(2);
+        tree.leggInn(4);
+        tree.leggInn(1);
 
         // Print the minimum element in the tree
         System.out.println("Minimum element in the tree: " + tree.min());
