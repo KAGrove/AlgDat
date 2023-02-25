@@ -1,5 +1,6 @@
 package host23.eksamen;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class SBinTre<T>
@@ -68,7 +69,7 @@ public class SBinTre<T>
     }
    private int dybde(Node<T> p){
         Node<T> q = rot;
-        int dybde = 0;
+        int dybde = -1;
         int cmp = 0;
         while (q != null)
         {
@@ -80,17 +81,39 @@ public class SBinTre<T>
                 q = q.høyre;
             }
             else{
-                return dybde;
+                dybde++;
+                break;
             }
             dybde++;
         }
         return dybde;
     }
 
-/*    public T[] nedersteNivå()
-    {
-        // Skal kodes
-    }*/
+    public T[] nedersteNivå(){
+        if(tom()){
+            return (T[]) new Object[0];
+        }
+        T[] liste = (T[]) new Object[(int) Math.pow(2,høyde())];
+        int index = 0;
+        return nedersteNivå(rot, liste, index);
+    }
+
+
+    public T[] nedersteNivå(Node<T> p, T[] liste, int index){
+        if(p.venstre == null && p.høyre == null){
+            liste[index] = p.verdi;
+            index++;
+        }
+
+        if(p.venstre != null){
+            return nedersteNivå(p.venstre, liste, index);
+        }
+        if(p.høyre != null){
+            return nedersteNivå(p.høyre, liste, index);
+        }
+        return liste;
+    }
+
 
     public static void main(String[] args) {
         // Create a new SBinTre instance with a comparator that compares integers
@@ -100,14 +123,15 @@ public class SBinTre<T>
         tree.leggInn(5);
         tree.leggInn(3);
         tree.leggInn(7);
-        tree.leggInn(2);
-        tree.leggInn(4);
-        tree.leggInn(1);
+
+
+
 
         // Print the minimum element in the tree
         System.out.println("Minimum element in the tree: " + tree.min());
         System.out.println("Høyde: " + tree.høyde);
         Node<Integer> node = new Node<>(1);
         System.out.println("Dybde: " + tree.dybde(node));
+        System.out.println("Nederste nivå: " + Arrays.toString(tree.nedersteNivå()));
     }
 } // class SBinTre
