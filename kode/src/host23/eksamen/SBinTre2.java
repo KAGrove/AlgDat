@@ -73,22 +73,23 @@ public class SBinTre2<T> implements Iterable<T>
 
     public int dybde(T verdi)
     {
-        if(tom()){
-            return -1;
-        }
-
         int dybde = 0;
-        Kø<Node<T>> kø = new TabellKø<>();
-        kø.leggInn(rot);
+        Node<T> p = rot;
 
-        while (!kø.tom()){
-            Node<T> p = kø.taUt();
-
-            if(p.venstre != null) kø.leggInn(p.venstre);
-            if(p.høyre != null) kø.leggInn(p.høyre);
-            dybde++;
+        while (p != null){
+            while(comp.compare(verdi, p.verdi) > 0){
+                p = p.høyre;
+                dybde++;
+            }
+            while (comp.compare(verdi, p.verdi) < 0){
+                p = p.venstre;
+                dybde++;
+            }
+            if(comp.compare(verdi, p.verdi) == 0){
+                return dybde;
+            }
         }
-        return dybde;
+        return -1;
     }
 
 //    public int avstand(T verdi1, T verdi2)
