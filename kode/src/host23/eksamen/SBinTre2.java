@@ -77,17 +77,12 @@ public class SBinTre2<T> implements Iterable<T>
         Node<T> p = rot;
 
         while (p != null){
-            while(comp.compare(verdi, p.verdi) > 0){
-                p = p.høyre;
-                dybde++;
-            }
-            while (comp.compare(verdi, p.verdi) < 0){
-                p = p.venstre;
-                dybde++;
-            }
-            if(comp.compare(verdi, p.verdi) == 0){
-                return dybde;
-            }
+
+            int cmp = comp.compare(verdi, p.verdi);
+
+            if(cmp < 0) p = p.venstre;
+            else if(cmp > 0) p = p.høyre;
+            else return dybde;
         }
         return -1;
     }
