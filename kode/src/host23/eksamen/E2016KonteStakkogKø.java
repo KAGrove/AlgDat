@@ -2,7 +2,7 @@ package host23.eksamen;
 
 import hjelpeklasser.*;
 
-public class E2016StakkogKø {
+public class E2016KonteStakkogKø {
 
     public static <T> int indeks(Stakk<T> s, T verdi){
         Stakk<T> t = new TabellStakk<>();

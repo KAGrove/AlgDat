@@ -1,6 +1,8 @@
 package host23.eksamen;
 
+import hjelpeklasser.Kø;
 import hjelpeklasser.Stakk;
+import hjelpeklasser.TabellKø;
 import hjelpeklasser.TabellStakk;
 
 import java.util.Comparator;
@@ -57,6 +59,9 @@ public class SBinTre2<T> implements Iterable<T>
             q = p; // q blir forelder til p
             cmp = comp.compare(verdi, p.verdi);
             p = cmp < 0 ? p.venstre : p.høyre;
+            if(cmp < 0) p = p.venstre;
+            else if(cmp > 0) p = p.høyre;
+            else return false; // verdi finnes fra før
         }
         p = new Node<>(verdi);
         if (tom()) rot = p;
@@ -66,20 +71,35 @@ public class SBinTre2<T> implements Iterable<T>
         return true; // vellykket innlegging
     }
 
-/*    public int dybde(T verdi)
+    public int dybde(T verdi)
     {
-        // skal kodes
+        if(tom()){
+            return -1;
+        }
+
+        int dybde = 0;
+        Kø<Node<T>> kø = new TabellKø<>();
+        kø.leggInn(rot);
+
+        while (!kø.tom()){
+            Node<T> p = kø.taUt();
+
+            if(p.venstre != null) kø.leggInn(p.venstre);
+            if(p.høyre != null) kø.leggInn(p.høyre);
+            dybde++;
+        }
+        return dybde;
     }
 
-    public int avstand(T verdi1, T verdi2)
-    {
-        // skal kodes
-    }
-
-    public int diameter()
-    {
-        // skal kodes
-    }*/
+//    public int avstand(T verdi1, T verdi2)
+//    {
+//        // skal kodes
+//    }
+//
+//    public int diameter()
+//    {
+//        // skal kodes
+//    }
 
     private class InordenIterator implements Iterator<T>
     {
