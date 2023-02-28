@@ -101,15 +101,25 @@ public class SBinTre4<T>
             else break;
         }
 
-        avstand(p, d, new int[]{0});
+        if(p== null) {
+            return null;
+        }
 
-        return null;
-    }
+        // Hvis høyden til p er mindre enn d, kan vi gi opp
+        if (p.høyde < d) return null;
+        // Subtreet med p som rotnode har nå minst en node med avstand d
+        // opp til p. Hvis det høyre subtreet er høyt nok, går vi dit.
+        // Hvis ikke, går vi til det venstre subtreet. Osv.
+        while (d > 0) {
+            if (p.høyre != null && d <= p.høyre.høyde) {
+                p = p.høyre;
+            } else {
+                p = p.venstre;
+            }
+            d--;
+        }
 
-    public T avstand(Node<T> p, int d, int[] teller){
-        int cmp = 0;
-
-
+        return p.verdi;
     }
 
 
