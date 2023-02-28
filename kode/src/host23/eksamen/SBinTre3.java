@@ -2,6 +2,7 @@ package host23.eksamen;
 
 import java.util.ArrayDeque;
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 public class SBinTre3<T>
 {
@@ -65,10 +66,37 @@ public class SBinTre3<T>
     public void settvAntall() {
         settvAntall(rot); // bruker den rekursive metoden over
     }
-    //    public T preorden(int indeks)
-//    {
-//        // kode mangler - skal lages
-//    }
+
+    public T preorden(int indeks, Node<T> p, int i) {
+        if(i == indeks){
+            return p.verdi;
+        }
+        i++;
+
+        if(p.venstre != null){
+            return preorden(indeks, p.venstre, i);
+        }
+        if(p.høyre != null){
+            return preorden(indeks, p.høyre, i);
+        }
+        if(i == indeks){
+            return p.verdi;
+        }
+        else{
+            throw new NoSuchElementException("indeksen fins ikke i treet");
+        }
+    }
+    public T preorden(int indeks) {
+        if(!tom()){
+            int i = 0;
+            return preorden(indeks, rot, i);
+        }
+        else{
+            throw new NoSuchElementException("indeksen fins ikke i treet");
+        }
+    }
+
+
 public static void main(String[] args) {
     SBinTre3<Integer> tre = new SBinTre3<>(Comparator.naturalOrder());
     int[] values = {11, 3, 25, 10, 5, 2, 15, 13, 20, 8, 22, 16, 4, 12};
@@ -105,6 +133,18 @@ public static void main(String[] args) {
             queue.offer(node.høyre);
         }
     }
+
+
+    System.out.println();
+    System.out.println("Verdien for indeksen er " + tree.preorden(0));
+    System.out.println("Verdien for indeksen er " + tree.preorden(1));
+    System.out.println("Verdien for indeksen er " + tree.preorden(2));
+    System.out.println("Verdien for indeksen er " + tree.preorden(3));
+    System.out.println("Verdien for indeksen er " + tree.preorden(4));
+    System.out.println("Verdien for indeksen er " + tree.preorden(5));
+    System.out.println("Verdien for indeksen er " + tree.preorden(6));
+    System.out.println("Verdien for indeksen er " + tree.preorden(7));
+
 }
 
 
