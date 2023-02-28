@@ -58,20 +58,14 @@ public class SBinTre3<T>
     {
         return rot == null;
     }
-    public void settvAntall(Node<T> p) {
-        if(p.venstre != null){
-            p.vAntall++;
-            settvAntall(p.venstre);
-        }
-        if(p.høyre != null){
-            settvAntall(p.høyre);
-        }
+    private static <T> int settvAntall(Node<T> p) {
+        if (p == null) return 0;
+        return (p.vAntall = settvAntall(p.venstre)) + settvAntall(p.høyre) + 1;
     }
     public void settvAntall() {
-
-        settvAntall(rot);
+        settvAntall(rot); // bruker den rekursive metoden over
     }
-//    public T preorden(int indeks)
+    //    public T preorden(int indeks)
 //    {
 //        // kode mangler - skal lages
 //    }
@@ -86,7 +80,7 @@ public static void main(String[] args) {
 
 
 
-    // settvAntall(): (Dette funker ikke, siden de allerede har blitt gitt verdi under leggInn() )
+    // settvAntall():
     System.out.println("Sett vAntall:");
     // Create a binary tree with some values
     SBinTre3<Integer> tree = new SBinTre3<>(Comparator.naturalOrder());
