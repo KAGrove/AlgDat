@@ -37,7 +37,6 @@ public class SBinTre4<T>
         while(p != null){
             q = p;
             cmp = comp.compare(verdi, p.verdi);
-            p.høyde++;
             if(cmp < 0){
                 p = p.venstre;
             }
@@ -51,6 +50,8 @@ public class SBinTre4<T>
         if (q == null) rot = p;
         else if (cmp < 0) q.venstre = p;
         else q.høyre = p;
+
+        antall++;
         return true;
     }
 
@@ -92,5 +93,7 @@ public static void main(String[] args) {
         tre.leggInn(k); // legger inn
     }
 //    System.out.print(tre.avstand(12,4) + " " + tre.avstand(4,4)); // Utskrift: 15 9
+
+    System.out.println("Nest minst her: " + tre.nestMinst());
 }
 } // slutt på class SBinTr
