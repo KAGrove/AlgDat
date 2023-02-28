@@ -130,8 +130,6 @@ public class SBinTre4<T>
                 p = p.venstre;
             }
         }
-
-
         return p.verdi;
     }
 
