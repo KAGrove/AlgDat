@@ -67,37 +67,37 @@ public class SBinTre3<T>
         settvAntall(rot); // bruker den rekursive metoden over
     }
 
-    public T preorden(int indeks, Node<T> p, int i) {
-        if(i == indeks){
+    public T preorden(int indeks, Node<T> p, int[] teller) {
+        if (p == null) {
+            throw new NoSuchElementException("indeksen er utenfor treet");
+        }
+        if (teller[0] == indeks) {
             return p.verdi;
         }
-        i++;
-
-        if(p.venstre != null){
-            return preorden(indeks, p.venstre, i);
+        teller[0]++;
+        T verdi = null;
+        if (p.venstre != null) {
+            verdi = preorden(indeks, p.venstre, teller);
         }
-        if(p.høyre != null){
-            return preorden(indeks, p.høyre, i);
+        if (verdi == null && p.høyre != null) {
+            verdi = preorden(indeks, p.høyre, teller);
         }
-        if(i == indeks){
-            return p.verdi;
-        }
-        else{
-            throw new NoSuchElementException("indeksen fins ikke i treet");
-        }
+        return verdi;
     }
+
     public T preorden(int indeks) {
-        if(!tom()){
-            int i = 0;
-            return preorden(indeks, rot, i);
-        }
-        else{
-            throw new NoSuchElementException("indeksen fins ikke i treet");
-        }
+        int[] teller = {0};
+        return preorden(indeks, rot, teller);
     }
 
 
-public static void main(String[] args) {
+
+
+
+
+
+
+    public static void main(String[] args) {
     SBinTre3<Integer> tre = new SBinTre3<>(Comparator.naturalOrder());
     int[] values = {11, 3, 25, 10, 5, 2, 15, 13, 20, 8, 22, 16, 4, 12};
     for (int v : values) {
@@ -136,14 +136,20 @@ public static void main(String[] args) {
 
 
     System.out.println();
-    System.out.println("Verdien for indeksen er " + tree.preorden(0));
-    System.out.println("Verdien for indeksen er " + tree.preorden(1));
-    System.out.println("Verdien for indeksen er " + tree.preorden(2));
-    System.out.println("Verdien for indeksen er " + tree.preorden(3));
-    System.out.println("Verdien for indeksen er " + tree.preorden(4));
-    System.out.println("Verdien for indeksen er " + tree.preorden(5));
-    System.out.println("Verdien for indeksen er " + tree.preorden(6));
-    System.out.println("Verdien for indeksen er " + tree.preorden(7));
+    System.out.println("Verdien for indeks " + 0 + " er " + tree.preorden(0));
+    System.out.println("Verdien for indeks " + 1 + " er " + tree.preorden(1));
+    System.out.println("Verdien for indeks " + 2 + " er " + tree.preorden(2));
+    System.out.println("Verdien for indeks " + 3 + " er " + tree.preorden(3));
+    System.out.println("Verdien for indeks " + 4 + " er " + tree.preorden(4));
+    System.out.println("Verdien for indeks " + 5 + " er " + tree.preorden(5));
+    System.out.println("Verdien for indeks " + 6 + " er " + tree.preorden(6));
+    System.out.println("Verdien for indeks " + 7 + " er " + tree.preorden(7));
+    System.out.println("Verdien for indeks " + 8 + " er " + tree.preorden(8));
+    System.out.println("Verdien for indeks " + 9 + " er " + tree.preorden(9));
+    System.out.println("Verdien for indeks " + 10 + " er " + tree.preorden(10));
+    System.out.println("Verdien for indeks " + 11 + " er " + tree.preorden(11));
+    System.out.println("Verdien for indeks " + 12 + " er " + tree.preorden(12));
+    System.out.println("Verdien for indeks " + 13 + " er " + tree.preorden(13));
 
 }
 
