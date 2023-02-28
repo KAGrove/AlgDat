@@ -82,10 +82,37 @@ public class SBinTre4<T>
         }
         return q.verdi;
     }
-//    public T avstand(T verdi, int d)
-//    {
-//        // kode mangler - skal kodes
-//    }
+    public T avstand(T verdi, int d) {
+        if(d < 0){
+            throw new IllegalStateException("Kan ikke ha negative avstander");
+        }
+
+        Node<T> p = rot;
+        int cmp = 0;
+
+        while(p != null){
+            cmp = comp.compare(verdi, p.verdi);
+            if(cmp < 0){
+                p = p.venstre;
+            }
+            else if(cmp > 0){
+                p = p.høyre;
+            }
+            else break;
+        }
+
+        avstand(p, d, new int[]{0});
+
+        return null;
+    }
+
+    public T avstand(Node<T> p, int d, int[] teller){
+        int cmp = 0;
+
+
+    }
+
+
 public static void main(String[] args) {
     int[] a = {12,4,10,22,2,6,17,8,20,14,15,5,9,13}; // verdiene fra Oppgave 4A/C
     SBinTre4<Integer> tre = new SBinTre4<>(Comparator.naturalOrder());
