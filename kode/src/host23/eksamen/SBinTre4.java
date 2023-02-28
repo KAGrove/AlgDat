@@ -1,6 +1,7 @@
 package host23.eksamen;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 public class SBinTre4<T>
 {
@@ -30,29 +31,43 @@ public class SBinTre4<T>
     public boolean tom() { return antall == 0; }
     public int høyde() { return tom() ? -1 : rot.høyde; }
 
-    public boolean leggInn(T verdi) {
-        Node<T> p = rot, q = null;
-        int cmp = 0;
-
-        while(p != null){
-            q = p;
-            cmp = comp.compare(verdi, p.verdi);
-            if(cmp < 0){
-                p = p.venstre;
-            }
-            else if(cmp > 0){
-                p = p.høyre;
-            }
-            else break;
+    public boolean leggInn(T verdi)
+    {
+        Objects.requireNonNull(verdi,"Ikke tillatt med null-verdier!");
+        Node<T> p = rot, q = null; // hjelpepekere
+        int cmp = 0; // for sammenligninger
+        int avstand = 0; // avstand opp til roten
+        while (p != null)
+        {
+            q = p; // q blir forelder til p
+            avstand++; // øker avstanden
+            cmp = comp.compare(verdi, p.verdi); // sammenligner
+            p = cmp < 0 ? p.venstre : p.høyre; // flytter p
         }
-
-        p = new Node<>(verdi);
-        if (q == null) rot = p;
-        else if (cmp < 0) q.venstre = p;
-        else q.høyre = p;
-
-        antall++;
-        return true;
+        p = new Node<>(verdi); // en ny node
+        if (tom()) // er treet tomt?
+        {
+            rot = p; // roten opprettes
+        }
+        else
+        {
+            if (cmp < 0) q.venstre = p; // p blir venstre barn til q
+            else q.høyre = p; // p blir høyre barn til q
+            if (q.høyde == 0) // høydeoppdateringer trengs
+            {
+                Node<T> r = rot; // starter på nytt i roten
+                while (r != p) // fortsetter ned til p
+                {
+                    if (r.høyde < avstand) r.høyde++; // høyden til r økes
+                    avstand--; // reduserer avstanden
+                    if (comp.compare(verdi,r.verdi) < 0)
+                        r = r.venstre; // går til venstre
+                    else r = r.høyre; // går til høyre
+                } // while
+            } // if
+        } // else
+        antall++; // en ny verdi i treet
+        return true; // vellykket innlegging
     }
 
     public T nestMinst() {
@@ -82,55 +97,53 @@ public class SBinTre4<T>
         }
         return q.verdi;
     }
-    public T avstand(T verdi, int d) {
-        if(d < 0){
-            throw new IllegalStateException("Kan ikke ha negative avstander");
+    public T avstand(T verdi, int d)
+    {
+        Objects.requireNonNull(verdi,"Ingen null-verdier!");
+        if (d < 0) throw new IllegalArgumentException("Negativ avstand!");
+        Node<T> p = rot; // starter i roten
+        while (p != null)
+        {
+            int cmp = comp.compare(verdi, p.verdi); // sammenligner
+            if (cmp < 0) p = p.venstre; // går til venstre
+            else if (cmp > 0) p = p.høyre; // går til høyre
+            else break; // verdi ligger i p
         }
-
-        Node<T> p = rot;
-        int cmp = 0;
-
-        while(p != null){
-            cmp = comp.compare(verdi, p.verdi);
-            if(cmp < 0){
-                p = p.venstre;
-            }
-            else if(cmp > 0){
-                p = p.høyre;
-            }
-            else break;
+        if (p == null) return null; // verdi ligger ikke i treet
+        // verdi ligger i p, eventuelle duplikater må ligge til høyre
+        if (p.høyre != null)
+        {
+            Node<T> q = p.høyre;
+            while (q.venstre != null) q = q.venstre;
+            if (comp.compare(verdi, q.verdi) == 0) return null; // et duplikat
         }
-
-        if(p== null) {
-            return null;
-        }
-
+        // Det er nå kun en forekomst av verdi og den ligger i p.
         // Hvis høyden til p er mindre enn d, kan vi gi opp
         if (p.høyde < d) return null;
         // Subtreet med p som rotnode har nå minst en node med avstand d
         // opp til p. Hvis det høyre subtreet er høyt nok, går vi dit.
         // Hvis ikke, går vi til det venstre subtreet. Osv.
-        while (d > 0) {
+        while (d-- > 0 && p != null) {
             if (p.høyre != null && d <= p.høyre.høyde) {
                 p = p.høyre;
             } else {
                 p = p.venstre;
             }
-            d--;
         }
+
 
         return p.verdi;
     }
 
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
     int[] a = {12,4,10,22,2,6,17,8,20,14,15,5,9,13}; // verdiene fra Oppgave 4A/C
     SBinTre4<Integer> tre = new SBinTre4<>(Comparator.naturalOrder());
     for (int k : a){
         tre.leggInn(k); // legger inn
     }
-//    System.out.print(tre.avstand(12,4) + " " + tre.avstand(4,4)); // Utskrift: 15 9
-
-    System.out.println("Nest minst her: " + tre.nestMinst());
-}
+        System.out.print(tre.avstand(12,4) + " " + tre.avstand(4,4)); // Utskrift: 15 9
+        System.out.println();
+        System.out.println("Nest minst her: " + tre.nestMinst());
+    }
 } // slutt på class SBinTr
