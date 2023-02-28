@@ -19,7 +19,7 @@ public class E2015KonteTo {
         return ut;
     }
     public static int[] snitt(int[] a, int[] b){
-        int[] snitt = new int[a.length];
+        int[] hjelp = new int[a.length];
         int i = 0, j = 0, k=0;
         while (i < a.length && j < b.length) {
             if (a[i] > b[j]) {
@@ -29,11 +29,16 @@ public class E2015KonteTo {
                 i++;
             }
             else{
-                snitt[k] = a[i];
+                hjelp[k] = a[i];
                 i++;
                 j++;
                 k++;
             }
+        }
+        // Forminsker tabellen
+        int[] snitt = new int[k];
+        for(int l = 0; l < k; l++){
+            snitt[l] = hjelp[l];
         }
         return snitt;
     }
