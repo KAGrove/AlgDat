@@ -94,63 +94,57 @@ public class SBinTre3<T>
 
 
     public static void main(String[] args) {
-    SBinTre3<Integer> tre = new SBinTre3<>(Comparator.naturalOrder());
-    int[] values = {11, 3, 25, 10, 5, 2, 15, 13, 20, 8, 22, 16, 4, 12};
-    for (int v : values) {
-        tre.leggInn(v);
-    }
-    int antall = tre.antall();
-    System.out.println("Antall noder i treet: " + antall);
-
-
-
-    // settvAntall():
-    System.out.println("Sett vAntall:");
-    // Create a binary tree with some values
-    SBinTre3<Integer> tree = new SBinTre3<>(Comparator.naturalOrder());
-    int[] values2 = {11, 3, 25, 10, 5, 2, 15, 13, 20, 8, 22, 16, 4, 12};
-    for (int v : values2) {
-        tree.leggInn(v);
-    }
-
-    // Set the vAntall value for each node
-    tree.settvAntall(tree.rot);
-
-    // Print the vAntall value for each node
-    ArrayDeque<SBinTre3.Node<Integer>> queue = new ArrayDeque<>();
-    queue.offer(tree.rot);
-    while (!queue.isEmpty()) {
-        SBinTre3.Node<Integer> node = queue.poll();
-        System.out.println(node.verdi + ": " + node.vAntall);
-        if (node.venstre != null) {
-            queue.offer(node.venstre);
+        SBinTre3<Integer> tre = new SBinTre3<>(Comparator.naturalOrder());
+        int[] values = {11, 3, 25, 10, 5, 2, 15, 13, 20, 8, 22, 16, 4, 12};
+        for (int v : values) {
+            tre.leggInn(v);
         }
-        if (node.høyre != null) {
-            queue.offer(node.høyre);
+        int antall = tre.antall();
+        System.out.println("Antall noder i treet: " + antall);
+
+
+        // settvAntall():
+        System.out.println("Sett vAntall:");
+        // Create a binary tree with some values
+        SBinTre3<Integer> tree = new SBinTre3<>(Comparator.naturalOrder());
+        int[] values2 = {11, 3, 25, 10, 5, 2, 15, 13, 20, 8, 22, 16, 4, 12};
+        for (int v : values2) {
+            tree.leggInn(v);
         }
+
+        // Set the vAntall value for each node
+        tree.settvAntall(tree.rot);
+
+        // Print the vAntall value for each node
+        ArrayDeque<SBinTre3.Node<Integer>> queue = new ArrayDeque<>();
+        queue.offer(tree.rot);
+        while (!queue.isEmpty()) {
+            SBinTre3.Node<Integer> node = queue.poll();
+            System.out.println(node.verdi + ": " + node.vAntall);
+            if (node.venstre != null) {
+                queue.offer(node.venstre);
+            }
+            if (node.høyre != null) {
+                queue.offer(node.høyre);
+            }
+        }
+
+        // Preorden:
+        System.out.println();
+        System.out.println("Verdien for indeks " + 0 + " er " + tree.preorden(0));
+        System.out.println("Verdien for indeks " + 1 + " er " + tree.preorden(1));
+        System.out.println("Verdien for indeks " + 2 + " er " + tree.preorden(2));
+        System.out.println("Verdien for indeks " + 3 + " er " + tree.preorden(3));
+        System.out.println("Verdien for indeks " + 4 + " er " + tree.preorden(4));
+        System.out.println("Verdien for indeks " + 5 + " er " + tree.preorden(5));
+        System.out.println("Verdien for indeks " + 6 + " er " + tree.preorden(6));
+        System.out.println("Verdien for indeks " + 7 + " er " + tree.preorden(7));
+        System.out.println("Verdien for indeks " + 8 + " er " + tree.preorden(8));
+        System.out.println("Verdien for indeks " + 9 + " er " + tree.preorden(9));
+        System.out.println("Verdien for indeks " + 10 + " er " + tree.preorden(10));
+        System.out.println("Verdien for indeks " + 11 + " er " + tree.preorden(11));
+        System.out.println("Verdien for indeks " + 12 + " er " + tree.preorden(12));
+        System.out.println("Verdien for indeks " + 13 + " er " + tree.preorden(13));
+        System.out.println("Verdien for indeks " + 14 + " er " + tree.preorden(14));
     }
-
-    // Preorden:
-    System.out.println();
-    System.out.println("Verdien for indeks " + 0 + " er " + tree.preorden(0));
-    System.out.println("Verdien for indeks " + 1 + " er " + tree.preorden(1));
-    System.out.println("Verdien for indeks " + 2 + " er " + tree.preorden(2));
-    System.out.println("Verdien for indeks " + 3 + " er " + tree.preorden(3));
-    System.out.println("Verdien for indeks " + 4 + " er " + tree.preorden(4));
-    System.out.println("Verdien for indeks " + 5 + " er " + tree.preorden(5));
-    System.out.println("Verdien for indeks " + 6 + " er " + tree.preorden(6));
-    System.out.println("Verdien for indeks " + 7 + " er " + tree.preorden(7));
-    System.out.println("Verdien for indeks " + 8 + " er " + tree.preorden(8));
-    System.out.println("Verdien for indeks " + 9 + " er " + tree.preorden(9));
-    System.out.println("Verdien for indeks " + 10 + " er " + tree.preorden(10));
-    System.out.println("Verdien for indeks " + 11 + " er " + tree.preorden(11));
-    System.out.println("Verdien for indeks " + 12 + " er " + tree.preorden(12));
-    System.out.println("Verdien for indeks " + 13 + " er " + tree.preorden(13));
-    System.out.println("Verdien for indeks " + 14 + " er " + tree.preorden(14));
-
-}
-
-
-
-
 } // SBinTre
