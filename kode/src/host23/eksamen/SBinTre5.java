@@ -2,6 +2,7 @@ package host23.eksamen;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SBinTre5<T> implements Iterable<T>
 {
@@ -122,7 +123,12 @@ public class SBinTre5<T> implements Iterable<T>
         // aktuelle hjelpemetoder skal inn her
         private InordenIterator() // konstruktør
         {
-            // kode mangler - skal lages
+            if(tom()) throw new NoSuchElementException("Treet er tomt!");
+
+            Node<T> p = rot;
+            while (p.venstre != null){
+                p = p.venstre;
+            }
         }
         public boolean hasNext()
         {
