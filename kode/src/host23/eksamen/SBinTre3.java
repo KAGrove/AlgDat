@@ -1,5 +1,6 @@
 package host23.eksamen;
 
+import java.util.ArrayDeque;
 import java.util.Comparator;
 
 public class SBinTre3<T>
@@ -57,10 +58,19 @@ public class SBinTre3<T>
     {
         return rot == null;
     }
-//    public void settvAntall()
-//    {
-//        // kode mangler - skal lages
-//    }
+    public void settvAntall(Node<T> p) {
+        if(p.venstre != null){
+            p.vAntall++;
+            settvAntall(p.venstre);
+        }
+        if(p.høyre != null){
+            settvAntall(p.høyre);
+        }
+    }
+    public void settvAntall() {
+
+        settvAntall(rot);
+    }
 //    public T preorden(int indeks)
 //    {
 //        // kode mangler - skal lages
@@ -73,7 +83,37 @@ public static void main(String[] args) {
     }
     int antall = tre.antall();
     System.out.println("Antall noder i treet: " + antall);
+
+
+
+    // settvAntall(): (Dette funker ikke, siden de allerede har blitt gitt verdi under leggInn() )
+    System.out.println("Sett vAntall:");
+    // Create a binary tree with some values
+    SBinTre3<Integer> tree = new SBinTre3<>(Comparator.naturalOrder());
+    int[] values2 = {11, 3, 25, 10, 5, 2, 15, 13, 20, 8, 22, 16, 4, 12};
+    for (int v : values2) {
+        tree.leggInn(v);
+    }
+
+    // Set the vAntall value for each node
+    tree.settvAntall(tree.rot);
+
+    // Print the vAntall value for each node
+    ArrayDeque<SBinTre3.Node<Integer>> queue = new ArrayDeque<>();
+    queue.offer(tree.rot);
+    while (!queue.isEmpty()) {
+        SBinTre3.Node<Integer> node = queue.poll();
+        System.out.println(node.verdi + ": " + node.vAntall);
+        if (node.venstre != null) {
+            queue.offer(node.venstre);
+        }
+        if (node.høyre != null) {
+            queue.offer(node.høyre);
+        }
+    }
 }
+
+
 
 
 } // SBinTre
