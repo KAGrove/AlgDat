@@ -87,14 +87,10 @@ public class SBinTre3<T>
 
     public T preorden(int indeks) {
         int[] teller = {0};
+        if (indeks < 0 || indeks >= antall())
+            throw new NoSuchElementException("Indeks " + indeks + " er utenfor treet!");
         return preorden(indeks, rot, teller);
     }
-
-
-
-
-
-
 
 
     public static void main(String[] args) {
@@ -134,7 +130,7 @@ public class SBinTre3<T>
         }
     }
 
-
+    // Preorden:
     System.out.println();
     System.out.println("Verdien for indeks " + 0 + " er " + tree.preorden(0));
     System.out.println("Verdien for indeks " + 1 + " er " + tree.preorden(1));
@@ -150,6 +146,7 @@ public class SBinTre3<T>
     System.out.println("Verdien for indeks " + 11 + " er " + tree.preorden(11));
     System.out.println("Verdien for indeks " + 12 + " er " + tree.preorden(12));
     System.out.println("Verdien for indeks " + 13 + " er " + tree.preorden(13));
+    System.out.println("Verdien for indeks " + 14 + " er " + tree.preorden(14));
 
 }
 
