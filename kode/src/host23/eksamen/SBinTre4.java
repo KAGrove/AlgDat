@@ -29,10 +29,31 @@ public class SBinTre4<T>
     public int antall() { return antall; }
     public boolean tom() { return antall == 0; }
     public int høyde() { return tom() ? -1 : rot.høyde; }
-//    public boolean leggInn(T verdi)
-//    {
-//        // kode mangler - skal kodes
-//    }
+
+    public boolean leggInn(T verdi) {
+        Node<T> p = rot, q = null;
+        int cmp = 0;
+
+        while(p != null){
+            q = p;
+            cmp = comp.compare(verdi, p.verdi);
+            p.høyde++;
+            if(cmp < 0){
+                p = p.venstre;
+            }
+            else if(cmp > 0){
+                p = p.høyre;
+            }
+            else break;
+        }
+
+        p = new Node<>(verdi);
+        if (q == null) rot = p;
+        else if (cmp < 0) q.venstre = p;
+        else q.høyre = p;
+        return true;
+    }
+
     public T nestMinst() {
         if(antall < 2){
             throw new IllegalStateException("Treet er for lite");
@@ -64,4 +85,12 @@ public class SBinTre4<T>
 //    {
 //        // kode mangler - skal kodes
 //    }
+public static void main(String[] args) {
+    int[] a = {12,4,10,22,2,6,17,8,20,14,15,5,9,13}; // verdiene fra Oppgave 4A/C
+    SBinTre4<Integer> tre = new SBinTre4<>(Comparator.naturalOrder());
+    for (int k : a){
+        tre.leggInn(k); // legger inn
+    }
+//    System.out.print(tre.avstand(12,4) + " " + tre.avstand(4,4)); // Utskrift: 15 9
+}
 } // slutt på class SBinTr
